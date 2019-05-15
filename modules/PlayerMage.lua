@@ -8,7 +8,7 @@ function PlayerMage:initialize( options )
 
     self.attack = nil
     self.attack_sound = love.audio.newSource("sounds/magic.wav", "static")
-    self.attack_cooldown = 0.3
+    self.attack_cooldown = 0.4
     self.attack_timer = 0
 
     local g = anim8.newGrid(self.frameWidth, self.frameHeight, self.image:getWidth(), self.image:getHeight(), 0, 80)

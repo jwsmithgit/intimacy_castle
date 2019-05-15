@@ -186,8 +186,8 @@ function love.keypressed(key)
             --nextRoom()
             transitioning = true
         end
-        if joystick_players.n <= 1 then room.players[1]:keyPressed( key ) end
-        if joystick_players.n == 0 then room.players[2]:keyPressed( key ) end
+        if joystick_players.n <= 1 and room.players[1] then room.players[1]:keyPressed( key ) end
+        if joystick_players.n == 0 and room.players[2] then room.players[2]:keyPressed( key ) end
     end
     if key == 'escape' then
         love.event.quit()
@@ -213,8 +213,8 @@ function love.keyreleased(key)
                 --nextRoom()
                 transitioning = true
             end
-            if joystick_players.n <= 1 then room.players[1]:keyReleased( key ) end
-            if joystick_players.n == 0 then room.players[2]:keyReleased( key ) end
+            if joystick_players.n <= 1 and room.players[1] then room.players[1]:keyReleased( key ) end
+            if joystick_players.n == 0 and room.players[2] then room.players[2]:keyReleased( key ) end
         end
     end
 end

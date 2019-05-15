@@ -43,7 +43,41 @@ function Magic:initialize( options )
 end
 
 function Magic:update( dt )
-    Projectile.update( self, dt )
+    --Projectile.update( self, dt )
+    local movex, movey = 0, 0
+    if self.dir == 'right' then movex = 1 end
+    if self.dir == 'left' then movex = -1 end
+    if self.dir == 'down' then movey = 1 end
+    if self.dir == 'up' then movey = -1 end
+
+    local x, y, cols, len = world:move(self, self.x + (self.speed * movex * dt), self.y + (self.speed * movey * dt), self.filter )
+    for i,v in ipairs(cols) do
+        if v.other.type == 'player' and self.type ~= 'magicgood' then
+            self:createEffect()
+            v.other:collision( self )
+
+            room:removeObject( 'projectile', self )
+            world:remove( self )
+            self.owner.attack = nil
+            return
+        elseif v.other.type == 'enemy' and self.type == 'magicgood' then
+            self:createEffect()
+            v.other:collision( self )
+
+            room:removeObject( 'projectile', self )
+            world:remove( self )
+            self.owner.attack = nil
+            return
+        elseif v.other.type == nil then
+            room:removeObject( 'projectile', self )
+            world:remove( self )
+            self.owner.attack = nil
+            return
+        end
+    end
+
+    self.x = x
+    self.y = y
 end
 
 function Magic:draw( )

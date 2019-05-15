@@ -101,6 +101,44 @@ function Wizard:draw()
 end
 
 function Wizard:chooseLocation()
+    --[[local playerx = math.floor(self.target:ox() / room.tile_size)
+    local playery = math.floor(self.target:oy() / room.tile_size)
+
+    print( playerx )
+    print( playery )
+
+    local leftx = {1, playerx}
+    local rightx = {playerx+1, room.width}
+    local upy = {1, playery}
+    local downy = {playery, room.height}
+
+    print((room.width*(playery-1))+leftx[1])
+    print((room.width*(playery-1))+leftx[2])
+    local choices = {}
+    for i=(room.width*(playery-1))+leftx[1],(room.width*(playery-1))+leftx[2] do if room.tiles[i] == 5 then table.insert(choices, {i, playery}) end end
+    for i=(room.width*(playery-1))+rightx[1],(room.width*(playery-1))+rightx[2] do if room.tiles[i] == 5 then table.insert(choices, {i, playery}) end end
+    --for i=(room.width*(playerx-1))+upy[1],(room.width*(playerx-1))+upy[2],room.width do table.insert(choices, {playerx, i}) end
+    --for i=(room.width*(playerx-1))+downy[1],(room.width*(playerx-1))+downy[2],room.width do table.insert(choices, {playerx, i}) end
+
+    local choice = choices[math.random(#choices)]
+    self.x = choice[1] % room.width*room.tile_size
+    self.y = choice[2]*room.tile_size
+
+    print("choice1")
+    print(choice[1])
+    print("choice2")
+    print(choice[2])
+    print(self.x)
+    print(self.y)
+
+    if self.x < self.target.x then self.dir = 'right'
+    elseif self.x > self.target.x then self.dir = 'left'
+    elseif self.y < self.target.y then self.dir = 'down'
+    elseif self.y > self.target.y then self.dir = 'up'
+    end
+    ]]--
+
+
     local leftx = {room.minx, self.target.x-self.frameWidth}
     local rightx = {self.target.x+self.frameWidth, room.maxx-self.frameWidth}
     local upy = {room.miny, self.target.y-self.frameHeight}

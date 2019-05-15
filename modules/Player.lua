@@ -98,7 +98,7 @@ function Player:update( dt )
         if self.hurt_timer <= 0 then
             if self.health.health <= 0 then
                 self.death_sound:play()
-                if self.attack ~= nil then endattack() end
+                if self.attack ~= nil then self:endAttack() end
                 room:removeObject( 'player', self )
                 world:remove( self )
                 room:playerDead()
